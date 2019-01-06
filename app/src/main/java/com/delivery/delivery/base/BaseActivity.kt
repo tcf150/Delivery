@@ -12,6 +12,8 @@ abstract class BaseActivity : AppCompatActivity(),
 
     abstract fun initPresenter()
 
+    abstract fun injectDependency()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(contentView())

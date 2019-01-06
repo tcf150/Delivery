@@ -3,15 +3,20 @@ package com.delivery.delivery.ui.home
 import com.delivery.delivery.R
 import com.delivery.delivery.base.BaseActivity
 import com.delivery.delivery.model.Deliveries
+import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeContract.View {
 
+    @Inject
     lateinit var presenter: HomeContract.Presenter
 
     override fun contentView() = R.layout.activity_home
 
+    override fun injectDependency() {
+
+    }
+
     override fun initPresenter() {
-        presenter = HomePresenter()
         presenter.attachView(this)
     }
 
