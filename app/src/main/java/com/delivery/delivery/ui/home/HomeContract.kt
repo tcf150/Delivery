@@ -10,5 +10,7 @@ interface HomeContract {
 
     interface Presenter : BaseContract.Presenter<View> {
         fun onDeliveriesClicked(deliveries : Deliveries)
+
+        fun loadMoreDeliveries(itemSize: Int)
     }
 }

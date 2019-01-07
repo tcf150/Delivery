@@ -27,6 +27,12 @@ class HomeActivity : BaseActivity(), HomeContract.View {
 
     override fun setupView() {
         rvDeliveries.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        adapter.lazyLoadListener = object: HomeAdapter.LazyLoadListener {
+            override fun onThresholdReached(itemSize: Int) {
+                presenter.loadMoreDeliveries(itemSize)
+            }
+
+        }
         rvDeliveries.adapter = adapter
     }
 
