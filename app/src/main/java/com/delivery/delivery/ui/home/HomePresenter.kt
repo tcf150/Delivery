@@ -7,7 +7,9 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class HomePresenter(private val deliveriesRepository: DeliveriesRepository) : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
+class HomePresenter(private val deliveriesRepository: DeliveriesRepository) :
+    BasePresenter<HomeContract.View>(),
+    HomeContract.Presenter {
 
     private var deliveriesSubscription: Subscription? = null
 
@@ -31,7 +33,7 @@ class HomePresenter(private val deliveriesRepository: DeliveriesRepository) : Ba
     }
 
     override fun onDeliveriesClicked(deliveries: Deliveries) {
-
+        view?.launchMapView(deliveries)
     }
 
     override fun detachView() {

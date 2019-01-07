@@ -6,6 +6,8 @@ import com.delivery.delivery.model.Deliveries
 interface HomeContract {
     interface View : BaseContract.View {
         fun addDeliveriesList(deliveries: ArrayList<Deliveries>)
+
+        fun launchMapView(deliveries: Deliveries)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

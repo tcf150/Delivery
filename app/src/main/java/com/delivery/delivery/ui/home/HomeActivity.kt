@@ -7,10 +7,12 @@ import com.delivery.delivery.base.BaseActivity
 import com.delivery.delivery.base.GlideApp
 import com.delivery.delivery.di.home.HomeComponent
 import com.delivery.delivery.model.Deliveries
+import com.delivery.delivery.ui.map.MapActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeContract.View {
+
     @Inject
     lateinit var presenter: HomeContract.Presenter
     private lateinit var adapter: HomeAdapter
@@ -45,6 +47,10 @@ class HomeActivity : BaseActivity(), HomeContract.View {
 
     override fun addDeliveriesList(deliveries: ArrayList<Deliveries>) {
         adapter.addDeliveriesList(deliveries)
+    }
+
+    override fun launchMapView(deliveries: Deliveries) {
+        MapActivity.start(this, deliveries)
     }
 
     override fun onDestroy() {

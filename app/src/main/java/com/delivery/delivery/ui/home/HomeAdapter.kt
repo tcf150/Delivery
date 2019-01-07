@@ -59,7 +59,11 @@ class HomeAdapter(val glideRequests: GlideRequests) : RecyclerView.Adapter<HomeA
         fun bind(glideRequests: GlideRequests, deliveries: Deliveries) {
             with(itemView) {
                 tag = deliveries
-                tvInfo.text = deliveries.description
+                tvInfo.text = String.format(
+                    context.getString(R.string.txt_deliveries_title_format),
+                    deliveries.description,
+                    deliveries.location.address
+                )
                 glideRequests.load(deliveries.imageUrl)
                     .centerCrop()
                     .into(ivImage)
