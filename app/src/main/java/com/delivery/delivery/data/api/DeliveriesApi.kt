@@ -10,5 +10,5 @@ interface DeliveriesApi {
     fun getDeliveries(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int
-    ): Observable<List<Deliveries>>
+    ): Observable<ArrayList<Deliveries>>
 }

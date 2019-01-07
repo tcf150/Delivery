@@ -6,14 +6,14 @@ import com.delivery.delivery.model.Deliveries
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class HomePresenter(val deliveriesRepository: DeliveriesRepository) : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
+class HomePresenter(private val deliveriesRepository: DeliveriesRepository) : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
 
     override fun onLoaded() {
-        deliveriesRepository.getDeliveries(0, 10)
+        deliveriesRepository.getDeliveries(0, 20)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({deliveriesList ->
-                view?.showDeliveriesList(deliveriesList)
+                view?.addDeliveriesList(deliveriesList)
             }, {it.printStackTrace()})
     }
 

@@ -4,8 +4,8 @@ import com.delivery.delivery.data.api.DeliveriesApi
 import com.delivery.delivery.model.Deliveries
 import rx.Observable
 
-class DeliveriesRepositoryImpl(val deliveriesApi: DeliveriesApi) : DeliveriesRepository {
+class DeliveriesRepositoryImpl(private val deliveriesApi: DeliveriesApi) : DeliveriesRepository {
 
-    override fun getDeliveries(offset: Int, limit: Int): Observable<List<Deliveries>> = deliveriesApi.getDeliveries(offset, limit)
+    override fun getDeliveries(offset: Int, limit: Int): Observable<ArrayList<Deliveries>> = deliveriesApi.getDeliveries(offset, limit)
 
 }

@@ -14,10 +14,13 @@ abstract class BaseActivity : AppCompatActivity(),
 
     abstract fun injectDependency()
 
+    abstract fun setupView()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependency()
         setContentView(contentView())
         initPresenter()
+        setupView()
     }
 }
