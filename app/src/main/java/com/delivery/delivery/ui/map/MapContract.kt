@@ -5,7 +5,7 @@ import com.delivery.delivery.model.Deliveries
 
 interface MapContract {
     interface View : BaseContract.View {
-        fun setDeliveriesTitle(title: String)
+        fun setDeliveriesTitle(title: String, location: String)
 
         fun setDeliveriesPhoto(imageUrl: String)
 

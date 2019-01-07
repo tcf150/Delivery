@@ -8,7 +8,7 @@ import com.delivery.delivery.base.BaseActivity
 import com.delivery.delivery.base.GlideApp
 import com.delivery.delivery.di.map.MapComponent
 import com.delivery.delivery.model.Deliveries
-import com.delivery.delivery.model.Location
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
@@ -43,8 +43,8 @@ class MapActivity : BaseActivity(),
     override fun contentView() = R.layout.activity_map
 
     override fun initPresenter() {
-        presenter.attachView(this)
         presenter.init(intent.getParcelableExtra(EXTRA_DELIVERIES) as Deliveries)
+        presenter.attachView(this)
     }
 
     override fun injectDependency() {
@@ -56,8 +56,8 @@ class MapActivity : BaseActivity(),
         //no operation for now
     }
 
-    override fun setDeliveriesTitle(title: String) {
-        lyDeliveries.tvInfo.text = title
+    override fun setDeliveriesTitle(title: String, location: String) {
+        lyDeliveries.tvInfo.text = String.format(getString(R.string.txt_deliveries_title_format), title, location)
     }
 
     override fun setDeliveriesPhoto(imageUrl: String) {
@@ -74,6 +74,8 @@ class MapActivity : BaseActivity(),
                 val markerOptions = MarkerOptions().position(latLng)
                     .title(String.format(getString(R.string.txt_deliveries_title_format), description, location.address))
                 googleMap.addMarker(markerOptions)
+                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
+                googleMap.moveCamera(cameraUpdate)
             }
         }
     }

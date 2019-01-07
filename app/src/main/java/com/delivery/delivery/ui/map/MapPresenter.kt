@@ -21,7 +21,7 @@ class MapPresenter :
 
     override fun onLoaded() {
         deliveries?.run {
-            view?.setDeliveriesTitle(description)
+            view?.setDeliveriesTitle(description, location.address)
             view?.setDeliveriesPhoto(imageUrl)
         }
     }

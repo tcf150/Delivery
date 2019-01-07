@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Delivery</string>
-
-    <string name="google_maps_api_key">AIzaSyAcnLXKNyR4n-Ctq4vjQDMHtuF0TdU7MLA</string>
-
+    <string name="google_maps_api_key">Put_Your_Google_Map_Key_Here</string>
     <string name="txt_deliveries_title_format">%s at %s</string>
+    <string name="title_thing_to_deliver">Things to Deliver</string>
+    <string name="title_delivery_detail">Delivery Details</string>
 </resources>
