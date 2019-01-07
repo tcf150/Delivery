@@ -5,13 +5,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.delivery.delivery.R
+import com.delivery.delivery.base.GlideRequests
 import com.delivery.delivery.model.Deliveries
 import com.delivery.delivery.util.Constant
 import kotlinx.android.synthetic.main.item_deliveries.view.*
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(val glideRequests: GlideRequests) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private val deliveriesList = ArrayList<Deliveries>()
     var lazyLoadListener: LazyLoadListener? = null
+    var onDeliveriesClickListener: OnDeliveriesClickListener? = null
+
+    private val onClickListener = View.OnClickListener { view ->
+        onDeliveriesClickListener?.let { listener ->
+            val deliveries = view.tag
+            if (deliveries is Deliveries) {
+                listener.onDeliveriesClicked(deliveries)
+            }
+        }
+    }
 
     fun addDeliveriesList(deliveriesList: ArrayList<Deliveries>) {
         this.deliveriesList.addAll(deliveriesList)
@@ -25,7 +36,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_deliveries, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, onClickListener)
     }
 
     override fun getItemCount() = deliveriesList.size
@@ -36,14 +47,28 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                 it.onThresholdReached(deliveriesList.size)
             }
         }
-        holder.bind(deliveriesList[position])
+        holder.bind(glideRequests, deliveriesList[position])
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, onClickListener: View.OnClickListener) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(deliveries: Deliveries) {
-            itemView.tvInfo.text = deliveries.description
+        init {
+            itemView.setOnClickListener(onClickListener)
         }
+
+        fun bind(glideRequests: GlideRequests, deliveries: Deliveries) {
+            with(itemView) {
+                tag = deliveries
+                tvInfo.text = deliveries.description
+                glideRequests.load(deliveries.imageUrl)
+                    .centerCrop()
+                    .into(ivImage)
+            }
+        }
+    }
+
+    interface OnDeliveriesClickListener {
+        fun onDeliveriesClicked(deliveries: Deliveries)
     }
 
     interface LazyLoadListener {
