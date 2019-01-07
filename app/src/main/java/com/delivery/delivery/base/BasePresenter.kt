@@ -1,6 +1,6 @@
 package com.delivery.delivery.base
 
-open abstract class BasePresenter<V> : BaseContract.Presenter<V> {
+abstract class BasePresenter<V> : BaseContract.Presenter<V> {
 
     protected var view : V? = null
 

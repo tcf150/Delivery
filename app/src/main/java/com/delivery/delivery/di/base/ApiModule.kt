@@ -3,6 +3,7 @@ package com.delivery.delivery.di.base
 import com.delivery.delivery.data.api.DeliveriesApi
 import com.delivery.delivery.data.repository.DeliveriesRepository
 import com.delivery.delivery.data.repository.DeliveriesRepositoryImpl
+import com.delivery.delivery.data.room.DeliveriesDatabase
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -19,7 +20,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideDeliveriesRepository(deliveriesApi: DeliveriesApi): DeliveriesRepository {
-        return DeliveriesRepositoryImpl(deliveriesApi)
+    fun provideDeliveriesRepository(deliveriesApi: DeliveriesApi, deliveriesDatabase: DeliveriesDatabase): DeliveriesRepository {
+        return DeliveriesRepositoryImpl(deliveriesApi, deliveriesDatabase)
     }
 }
