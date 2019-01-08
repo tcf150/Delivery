@@ -15,5 +15,5 @@ interface DeliveriesDao {
     fun getDeliveriesList(offset: Int, limit: Int): List<Deliveries>
 
     @Query("DELETE FROM deliveries")
-    fun deleteAllInboxList()
+    fun clearDeliveriesList()
 }
