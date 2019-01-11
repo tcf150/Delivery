@@ -1,5 +1,6 @@
 package com.delivery.delivery.ui.home
 
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.delivery.delivery.R
@@ -58,7 +59,12 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         MapActivity.start(this, deliveries)
     }
 
+    override fun showLoading() {
+        progressBar.visibility = View.VISIBLE
+    }
+
     override fun hideLoading() {
+        progressBar.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = false
     }
 

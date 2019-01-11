@@ -12,6 +12,8 @@ interface HomeContract {
         fun launchMapView(deliveries: Deliveries)
 
         fun hideLoading()
+
+        fun showLoading()
     }
 
     interface Presenter : BaseContract.Presenter<View> {
