@@ -11,7 +11,6 @@ import com.delivery.delivery.model.Deliveries
     entities = [Deliveries::class],
     version = DATABASE_VERSION,
     exportSchema = true)
-@TypeConverters(DeliveriesConverter::class)
 abstract class DeliveriesDatabase : RoomDatabase() {
     companion object {
         const val DATABASE_NAME = "delivery.db"
