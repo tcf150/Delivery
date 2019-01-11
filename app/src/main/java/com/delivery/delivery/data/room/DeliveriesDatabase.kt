@@ -2,9 +2,7 @@ package com.delivery.delivery.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.delivery.delivery.data.room.DeliveriesDatabase.Companion.DATABASE_VERSION
-
 import com.delivery.delivery.model.Deliveries
 
 @Database(
