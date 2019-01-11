@@ -43,7 +43,7 @@ class MapActivity : BaseActivity(),
     override fun contentView() = R.layout.activity_map
 
     override fun initPresenter() {
-        presenter.init(intent.getParcelableExtra(EXTRA_DELIVERIES) as Deliveries)
+        presenter.init(intent.getParcelableExtra(EXTRA_DELIVERIES))
         presenter.attachView(this)
     }
 
