@@ -7,7 +7,7 @@ interface HomeContract {
     interface View : BaseContract.View {
         fun clearDeliveriesList()
 
-        fun addDeliveriesList(deliveries: ArrayList<Deliveries>)
+        fun addDeliveriesList(deliveries: List<Deliveries>)
 
         fun launchMapView(deliveries: Deliveries)
 

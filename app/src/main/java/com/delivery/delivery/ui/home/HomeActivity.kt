@@ -46,8 +46,8 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         rvDeliveries.adapter = adapter
     }
 
-    override fun addDeliveriesList(deliveries: ArrayList<Deliveries>) {
-        adapter.addDeliveriesList(deliveries)
+    override fun addDeliveriesList(deliveries: List<Deliveries>) {
+        adapter.addDeliveriesList(deliveries.toMutableList())
     }
 
     override fun clearDeliveriesList() {

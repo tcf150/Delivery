@@ -10,7 +10,7 @@ import com.delivery.delivery.model.Deliveries
 import com.delivery.delivery.util.Constant
 import kotlinx.android.synthetic.main.item_deliveries.view.*
 
-class HomeAdapter(val glideRequests: GlideRequests) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(private val glideRequests: GlideRequests) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     private val deliveriesList = ArrayList<Deliveries>()
     var lazyLoadListener: LazyLoadListener? = null
     var onDeliveriesClickListener: OnDeliveriesClickListener? = null
@@ -24,7 +24,7 @@ class HomeAdapter(val glideRequests: GlideRequests) : RecyclerView.Adapter<HomeA
         }
     }
 
-    fun addDeliveriesList(deliveriesList: ArrayList<Deliveries>) {
+    fun addDeliveriesList(deliveriesList: MutableList<Deliveries>) {
         this.deliveriesList.addAll(deliveriesList)
         notifyDataSetChanged()
     }

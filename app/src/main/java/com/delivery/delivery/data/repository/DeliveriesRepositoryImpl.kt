@@ -8,7 +8,7 @@ import rx.Observable
 
 class DeliveriesRepositoryImpl(private val deliveriesApi: DeliveriesApi, private val deliveriesDatabase: DeliveriesDatabase) : DeliveriesRepository {
 
-    override fun getDeliveries(offset: Int, limit: Int): Observable<ArrayList<Deliveries>> {
+    override fun getDeliveries(offset: Int, limit: Int): Observable<List<Deliveries>> {
         return if (NetworkManager.get().isConnected()) {
            deliveriesApi.getDeliveries(offset, limit)
                .doOnNext { deliveriesDatabase.deliveriesDao().saveDeliveriesList(it) }
