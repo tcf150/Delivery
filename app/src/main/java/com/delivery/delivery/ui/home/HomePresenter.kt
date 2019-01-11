@@ -14,21 +14,25 @@ class HomePresenter(private val deliveriesRepository: DeliveriesRepository) :
     private var deliveriesSubscription: Subscription? = null
 
     override fun onLoaded() {
-       loadDeliveries(0)
+       loadDeliveries(0, false)
     }
 
-    override fun loadMoreDeliveries(itemSize: Int) {
-        loadDeliveries(itemSize)
+    override fun loadMoreDeliveries(itemSize: Int, refresh: Boolean) {
+        loadDeliveries(itemSize, refresh)
     }
 
-    private fun loadDeliveries(itemSize: Int) {
+    private fun loadDeliveries(itemSize: Int, refresh: Boolean) {
         if(deliveriesSubscription != null) return
         deliveriesSubscription = deliveriesRepository.getDeliveries(itemSize, 20)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnTerminate { deliveriesSubscription = null}
             .subscribe({deliveriesList ->
-                view?.addDeliveriesList(deliveriesList)
+                view?.run {
+                    if (refresh) clearDeliveriesList()
+                    addDeliveriesList(deliveriesList)
+                    hideLoading()
+                }
             }, {it.printStackTrace()})
     }
 

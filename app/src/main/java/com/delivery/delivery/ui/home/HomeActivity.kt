@@ -29,6 +29,7 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     }
 
     override fun setupView() {
+        swipeRefreshLayout.setOnRefreshListener { presenter.loadMoreDeliveries(0, true) }
         rvDeliveries.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         adapter = HomeAdapter(GlideApp.with(this))
         adapter.onDeliveriesClickListener = object : HomeAdapter.OnDeliveriesClickListener {
@@ -49,8 +50,16 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         adapter.addDeliveriesList(deliveries)
     }
 
+    override fun clearDeliveriesList() {
+        adapter.clearDeliveries()
+    }
+
     override fun launchMapView(deliveries: Deliveries) {
         MapActivity.start(this, deliveries)
+    }
+
+    override fun hideLoading() {
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onDestroy() {

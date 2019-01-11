@@ -5,14 +5,18 @@ import com.delivery.delivery.model.Deliveries
 
 interface HomeContract {
     interface View : BaseContract.View {
+        fun clearDeliveriesList()
+
         fun addDeliveriesList(deliveries: ArrayList<Deliveries>)
 
         fun launchMapView(deliveries: Deliveries)
+
+        fun hideLoading()
     }
 
     interface Presenter : BaseContract.Presenter<View> {
         fun onDeliveriesClicked(deliveries : Deliveries)
 
-        fun loadMoreDeliveries(itemSize: Int)
+        fun loadMoreDeliveries(itemSize: Int, refresh: Boolean = false)
     }
 }

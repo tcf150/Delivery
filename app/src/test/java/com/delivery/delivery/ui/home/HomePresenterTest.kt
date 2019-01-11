@@ -27,7 +27,7 @@ class HomePresenterTest {
     lateinit var view: HomeContract.View
     @Mock
     lateinit var deliveriesRepository: DeliveriesRepository
-    lateinit var presenter: HomePresenter
+    private lateinit var presenter: HomePresenter
 
     private val deliveriesList = generateDeliveriesList()
 
@@ -44,12 +44,21 @@ class HomePresenterTest {
         presenter.onLoaded()
         rxJavaRule.getTestScheduler().advanceTimeBy(1, TimeUnit.SECONDS)
         verify(view).addDeliveriesList(deliveriesList)
+        verify(view).hideLoading()
     }
 
     @Test
     fun onDeliveriesClicked() {
         presenter.onDeliveriesClicked(deliveriesList[0])
         verify(view).launchMapView(deliveriesList[0])
+    }
+
+    @Test
+    fun onPullRefreshLayout() {
+        presenter.loadMoreDeliveries(0, true)
+        rxJavaRule.getTestScheduler().advanceTimeBy(1, TimeUnit.SECONDS)
+        verify(view).addDeliveriesList(deliveriesList)
+        verify(view).hideLoading()
     }
 
     private fun generateDeliveriesList(): ArrayList<Deliveries> {
