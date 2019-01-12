@@ -1,37 +1,31 @@
 package com.delivery.delivery.unit.test
 
-import rx.Scheduler
-import rx.android.plugins.RxAndroidPlugins
-import rx.android.plugins.RxAndroidSchedulersHook
-import rx.plugins.RxJavaHooks
-import rx.schedulers.Schedulers
-import rx.schedulers.TestScheduler
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.TestScheduler
+
 
 class RxJavaHooker {
     val testScheduler = TestScheduler()
 
     init {
-        RxJavaHooks.reset()
-        RxAndroidPlugins.getInstance().reset()
+        RxJavaPlugins.reset()
+        RxAndroidPlugins.reset()
     }
 
     fun hookSchedulers() {
-        RxJavaHooks.setOnIOScheduler {  testScheduler }
-        RxJavaHooks.setOnComputationScheduler { testScheduler }
-        RxJavaHooks.setOnNewThreadScheduler { testScheduler }
+        RxJavaPlugins.onIoScheduler(testScheduler)
+        RxJavaPlugins.onComputationScheduler(testScheduler)
+        RxJavaPlugins.onNewThreadScheduler(testScheduler)
     }
 
     fun hookMainThreadScheduler() {
-        val rxAndroidPlugins = RxAndroidPlugins.getInstance()
-        rxAndroidPlugins.registerSchedulersHook(object : RxAndroidSchedulersHook() {
-            override fun getMainThreadScheduler(): Scheduler {
-                return Schedulers.immediate()
-            }
-        })
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
     }
 
     fun reset() {
-        RxJavaHooks.reset()
-        RxAndroidPlugins.getInstance().reset()
+        RxJavaPlugins.reset()
+        RxAndroidPlugins.reset()
     }
 }
