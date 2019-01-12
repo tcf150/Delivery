@@ -4,6 +4,7 @@ import com.delivery.delivery.data.repository.DeliveriesRepository
 import com.delivery.delivery.model.Deliveries
 import com.delivery.delivery.model.Location
 import com.delivery.delivery.unit.test.RxJavaRule
+import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -13,7 +14,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnit
 import org.powermock.modules.junit4.PowerMockRunner
-import rx.Observable
 import java.util.concurrent.TimeUnit
 
 @RunWith(PowerMockRunner::class)
