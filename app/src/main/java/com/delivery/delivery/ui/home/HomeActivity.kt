@@ -1,5 +1,6 @@
 package com.delivery.delivery.ui.home
 
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,10 @@ import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeContract.View {
 
+    companion object {
+        const val EXTRA_DELIVERIES_DATA = "deliveriesData"
+    }
+
     @Inject
     lateinit var presenter: HomeContract.Presenter
     private lateinit var adapter: HomeAdapter
@@ -25,8 +30,16 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         homeComponent.inject(this)
     }
 
-    override fun initPresenter() {
+    override fun initPresenter(savedInstanceState: Bundle?) {
         presenter.attachView(this)
+        if (savedInstanceState != null) {
+            val deliveriesList: ArrayList<Deliveries>? = savedInstanceState.getParcelableArrayList(EXTRA_DELIVERIES_DATA)
+            deliveriesList?.let {
+                presenter.init(it)
+            }
+        } else {
+            presenter.loadMoreDeliveries(0, false)
+        }
     }
 
     override fun setupView() {
@@ -66,6 +79,11 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     override fun hideLoading() {
         progressBar.visibility = View.GONE
         swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(EXTRA_DELIVERIES_DATA, adapter.deliveriesList)
     }
 
     override fun onDestroy() {

@@ -11,7 +11,7 @@ import com.delivery.delivery.util.Constant
 import kotlinx.android.synthetic.main.item_deliveries.view.*
 
 class HomeAdapter(private val glideRequests: GlideRequests) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
-    private val deliveriesList = ArrayList<Deliveries>()
+    val deliveriesList = ArrayList<Deliveries>()
     var lazyLoadListener: LazyLoadListener? = null
     var onDeliveriesClickListener: OnDeliveriesClickListener? = null
 

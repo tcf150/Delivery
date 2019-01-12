@@ -10,13 +10,19 @@ import rx.schedulers.Schedulers
 class HomePresenter(private val deliveriesRepository: DeliveriesRepository) :
     BasePresenter<HomeContract.View>(),
     HomeContract.Presenter {
-
     private var deliveriesSubscription: Subscription? = null
 
     private var isEndOfList = false
 
+    override fun init(deliveriesList: List<Deliveries>) {
+       view?.run {
+           addDeliveriesList(deliveriesList)
+           hideLoading()
+       }
+    }
+
     override fun onLoaded() {
-       loadDeliveries(0, false)
+
     }
 
     override fun loadMoreDeliveries(itemSize: Int, refresh: Boolean) {

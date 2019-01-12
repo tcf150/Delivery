@@ -10,7 +10,7 @@ abstract class BaseActivity : AppCompatActivity(),
     @LayoutRes
     abstract fun contentView(): Int
 
-    abstract fun initPresenter()
+    abstract fun initPresenter(savedInstanceState: Bundle?)
 
     abstract fun injectDependency()
 
@@ -20,7 +20,7 @@ abstract class BaseActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         injectDependency()
         setContentView(contentView())
-        initPresenter()
         setupView()
+        initPresenter(savedInstanceState)
     }
 }
