@@ -4,7 +4,7 @@ import com.delivery.delivery.data.api.DeliveriesApi
 import com.delivery.delivery.data.room.DeliveriesDatabase
 import com.delivery.delivery.model.Deliveries
 import com.delivery.delivery.util.NetworkManager
-import rx.Observable
+import io.reactivex.Observable
 
 class DeliveriesRepositoryImpl(private val deliveriesApi: DeliveriesApi, private val deliveriesDatabase: DeliveriesDatabase) : DeliveriesRepository {
 

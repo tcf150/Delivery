@@ -3,14 +3,14 @@ package com.delivery.delivery.ui.home
 import com.delivery.delivery.base.BasePresenter
 import com.delivery.delivery.data.repository.DeliveriesRepository
 import com.delivery.delivery.model.Deliveries
-import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class HomePresenter(private val deliveriesRepository: DeliveriesRepository) :
     BasePresenter<HomeContract.View>(),
     HomeContract.Presenter {
-    private var deliveriesSubscription: Subscription? = null
+    private var deliveriesSubscription: Disposable? = null
 
     private var isEndOfList = false
 
@@ -56,6 +56,6 @@ class HomePresenter(private val deliveriesRepository: DeliveriesRepository) :
 
     override fun detachView() {
         super.detachView()
-        deliveriesSubscription?.unsubscribe()
+        deliveriesSubscription?.dispose()
     }
 }

@@ -1,9 +1,9 @@
 package com.delivery.delivery.data.api
 
 import com.delivery.delivery.model.Deliveries
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
-import rx.Observable
 
 interface DeliveriesApi {
     @GET("deliveries")
